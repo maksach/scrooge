@@ -29,6 +29,9 @@ app.post('/webhook', function (req, res) {
         if (event.message && event.message.text) {
         	if(event.message.text == "Next") {
         		sendMessage(event.sender.id, {text: "Enter the month"});
+        		var month = event.message.text;
+        		sendMessage(event.sender.id, {text: "Enter your expenses for the month of " + month});
+        		sendMessage(event.sender.id, {text: "Enter your assets for the month of " + month});
         	}
             //sendMessage(event.sender.id, {text: "Echo: " + event.message.text});
         }
