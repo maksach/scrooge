@@ -27,7 +27,10 @@ app.post('/webhook', function (req, res) {
     for (i = 0; i < events.length; i++) {
         var event = events[i];
         if (event.message && event.message.text) {
-            sendMessage(event.sender.id, {text: "Echo: " + event.message.text});
+        	if(event.message.text == "Next") {
+        		sendMessage(event.sender.id, {text: "Enter the month"});
+        	}
+            //sendMessage(event.sender.id, {text: "Echo: " + event.message.text});
         }
     }
     res.sendStatus(200);
