@@ -2,7 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');  
 var request = require('request');  
 var app = express();
-var questionNum = 0;
+var questionNum = 1;
 
 app.use(bodyParser.urlencoded({extended: false}));  
 app.use(bodyParser.json());  
@@ -27,12 +27,10 @@ app.post('/webhook', function (req, res) {
     var events = req.body.entry[0].messaging;
     for (i = 0; i < events.length; i++) {
         var event = events[i];
-        questionNum++;
         if (event.message && event.message.text) {
         	console.log("HI");
           	if(questionNum == 1) {
-          		sendMessage(event.sender.id, {text: "Thanks for visiting $crooge! Our financial advising application works to help college students save money on a monthly basis through budget analysis with Mint. Now tell me, would you like to save money this month?"});
-        		questionNum = questionNum + 1;
+          		sendQuestion1(event.sender.id, event.message.text);
           	} else if(questionNum == 2) {
           		console.log("HI AGAIN");
           		if(event.message.text == 'Yes' || 'yes') {
@@ -41,7 +39,6 @@ app.post('/webhook', function (req, res) {
         			sendMessage(event.sender.id, {text: "Alright. That's fine. Goodbye!"});
         			break;
         		}
-       			questionNum++;
           	} /*else if(questionNum == 2) {
 
           	} else if(questionNum == 3) {
@@ -58,6 +55,21 @@ app.post('/webhook', function (req, res) {
     }
     res.sendStatus(200);
 });
+
+function sendQuestion1(recipientId, message) {
+	event.sender.id, {text: "Thanks for visiting $crooge! Our financial advising application works to help college students save money on a monthly basis through budget analysis with Mint. Now tell me, would you like to save money this month?"});
+	questionNum = questionNum + 1;
+}
+
+function sendQuestion2(recipientId, message) {
+	if(event.message.text == 'Yes' || 'yes') {
+        sendMessage(event.sender.id, {text: "Ok awesome! Let's get started!"});
+    } else {
+        sendMessage(event.sender.id, {text: "Alright. That's fine. Goodbye!"});
+        break;
+    }
+    questionNum = questionNum + 1;
+}
 
 // generic function sending messages
 function sendMessage(recipientId, message) {  
