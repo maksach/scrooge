@@ -44,6 +44,7 @@ app.post('/webhook', function (req, res) {
           			var value = categories[j].split(" ")[1];
           			table[key] = value;
           		}
+          		sendQuestion4(event.sender.id, event.message.text);
           	}
         }
     }
@@ -72,6 +73,7 @@ function sendQuestion3(recipientId, message) {
 
 
 function sendQuestion4(recipientId, message) {
+	sendMessage(recipientId, {text: "Perfect. For the month of " + month + ", let's manage your finances. The 4 main categories college students spend money on are Food, Utilities, Gas, and"});
 	questionNum = questionNum + 1;
 }
 
