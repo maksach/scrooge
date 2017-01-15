@@ -28,22 +28,11 @@ app.post('/webhook', function (req, res) {
     for (i = 0; i < events.length; i++) {
         var event = events[i];
         if (event.message && event.message.text) {
-          	if(questionNum == 1) {
+          	if(questionNum === 1) {
           		sendQuestion1(event.sender.id, event.message.text);
-          	} else if(questionNum == 2) {
+          	} else if(questionNum === 2) {
           		sendQuestion2(event.sender.id, event.message.text);
-          	} /*else if(questionNum == 2) {
-
-          	} else if(questionNum == 3) {
-
-          	} else if(questionNum == 4) {
-
-          	} else if(questionNum == 5) {
-
-          	} else if(questionNum == 6) {
-
           	}
-          	*/
         }
     }
     res.sendStatus(200);
@@ -55,8 +44,7 @@ function sendQuestion1(recipientId, message) {
 }
 
 function sendQuestion2(recipientId, message) {
-	console.log(message);
-	if(message == 'Yes' || 'yes') {
+	if(message.toLowerCase() === 'yes') {
         sendMessage(recipientId, {text: "Ok awesome! Let's get started!"});
         questionNum = questionNum + 1;
     } else {
