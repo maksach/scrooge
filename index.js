@@ -32,13 +32,7 @@ app.post('/webhook', function (req, res) {
           	if(questionNum == 1) {
           		sendQuestion1(event.sender.id, event.message.text);
           	} else if(questionNum == 2) {
-          		console.log("HI AGAIN");
-          		if(event.message.text == 'Yes' || 'yes') {
-        			sendMessage(event.sender.id, {text: "Ok awesome! Let's get started!"});
-        		} else {
-        			sendMessage(event.sender.id, {text: "Alright. That's fine. Goodbye!"});
-        			break;
-        		}
+          		sendQuestion2(event.sender.id, event.message.text);
           	} /*else if(questionNum == 2) {
 
           	} else if(questionNum == 3) {
