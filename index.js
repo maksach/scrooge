@@ -2,6 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');  
 var request = require('request');  
 var app = express();
+var questionNum = 0;
 
 app.use(bodyParser.urlencoded({extended: false}));  
 app.use(bodyParser.json());  
@@ -26,58 +27,33 @@ app.post('/webhook', function (req, res) {
     var events = req.body.entry[0].messaging;
     for (i = 0; i < events.length; i++) {
         var event = events[i];
-        if (event.message && event.message.text) {  
-    		if (!kittenMessage(event.sender.id, event.message.text)) {
-        		sendMessage(event.sender.id, {text: "Echo: " + event.message.text});
-    		}
+        if (event.message && event.message.text) {
+          	if(questionNum == 0) {
+          		if(event.message.text == 'Yes' || 'yes') {
+        			sendMessage(event.sender.id, {text: "Ok awesome! Let's get started!"});
+        		} else {
+        			sendMessage(event.sender.id, {text: "Alright. That's fine. Goodbye!"});
+        		}
+        		questionNum++;
+          	} /*else if(questionNum == 1) {
+
+        			
+          	} else if(questionNum == 2) {
+
+          	} else if(questionNum == 3) {
+
+          	} else if(questionNum == 4) {
+
+          	} else if(questionNum == 5) {
+
+          	} else if(questionNum == 6) {
+
+          	}
+          	*/
         }
     }
     res.sendStatus(200);
 });
-
-// send rich message with kitten
-function kittenMessage(recipientId, text) {
-
-    text = text || "";
-    var values = text.split(' ');
-
-    if (values.length === 3 && values[0] === 'kitten') {
-        if (Number(values[1]) > 0 && Number(values[2]) > 0) {
-
-            var imageUrl = "https://placekitten.com/" + Number(values[1]) + "/" + Number(values[2]);
-
-            message = {
-                "attachment": {
-                    "type": "template",
-                    "payload": {
-                        "template_type": "generic",
-                        "elements": [{
-                            "title": "Kitten",
-                            "subtitle": "Cute kitten picture",
-                            "image_url": imageUrl ,
-                            "buttons": [{
-                                "type": "web_url",
-                                "url": imageUrl,
-                                "title": "Show kitten"
-                                }, {
-                                "type": "postback",
-                                "title": "I like this",
-                                "payload": "User " + recipientId + " likes kitten " + imageUrl,
-                            }]
-                        }]
-                    }
-                }
-            };
-
-            sendMessage(recipientId, message);
-
-            return true;
-        }
-    }
-
-    return false;
-
-};
 
 // generic function sending messages
 function sendMessage(recipientId, message) {  
