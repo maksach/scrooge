@@ -28,7 +28,6 @@ app.post('/webhook', function (req, res) {
     for (i = 0; i < events.length; i++) {
         var event = events[i];
         if (event.message && event.message.text) {
-        	console.log("HI");
           	if(questionNum == 1) {
           		sendQuestion1(event.sender.id, event.message.text);
           	} else if(questionNum == 2) {
@@ -59,10 +58,10 @@ function sendQuestion2(recipientId, message) {
 	console.log(message);
 	if(message == 'Yes' || 'yes') {
         sendMessage(recipientId, {text: "Ok awesome! Let's get started!"});
+        questionNum = questionNum + 1;
     } else {
         sendMessage(recipientId, {text: "Alright. That's fine. Goodbye!"});
     }
-    questionNum = questionNum + 1;
 }
 
 // generic function sending messages
