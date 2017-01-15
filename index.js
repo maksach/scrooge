@@ -27,8 +27,9 @@ app.post('/webhook', function (req, res) {
     var events = req.body.entry[0].messaging;
     for (i = 0; i < events.length; i++) {
         var event = events[i];
+        questionNum++;
         if (event.message && event.message.text) {
-          	if(questionNum == 0) {
+          	if(questionNum == 1) {
           		if(event.message.text == 'Yes' || 'yes') {
         			sendMessage(event.sender.id, {text: "Ok awesome! Let's get started!"});
         		} else {
