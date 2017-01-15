@@ -57,15 +57,15 @@ app.post('/webhook', function (req, res) {
 });
 
 function sendQuestion1(recipientId, message) {
-	sendMessage(event.sender.id, {text: "Thanks for visiting $crooge! Our financial advising application works to help college students save money on a monthly basis through budget analysis with Mint. Now tell me, would you like to save money this month?"});
+	sendMessage(recipientId, {text: "Thanks for visiting $crooge! Our financial advising application works to help college students save money on a monthly basis through budget analysis with Mint. Now tell me, would you like to save money this month?"});
 	questionNum = questionNum + 1;
 }
 
 function sendQuestion2(recipientId, message) {
-	if(event.message.text == 'Yes' || 'yes') {
-        sendMessage(event.sender.id, {text: "Ok awesome! Let's get started!"});
+	if(message == 'Yes' || 'yes') {
+        sendMessage(recipientId, {text: "Ok awesome! Let's get started!"});
     } else {
-        sendMessage(event.sender.id, {text: "Alright. That's fine. Goodbye!"});
+        sendMessage(recipientId, {text: "Alright. That's fine. Goodbye!"});
         return;
     }
     questionNum = questionNum + 1;
