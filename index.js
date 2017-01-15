@@ -4,7 +4,7 @@ var request = require('request');
 var app = express();
 var questionNum = 1;
 var month;
-var table = {};
+//var table = {};
 
 app.use(bodyParser.urlencoded({extended: false}));  
 app.use(bodyParser.json());  
@@ -69,10 +69,11 @@ function sendQuestion3(recipientId, message) {
 	questionNum = questionNum + 1;
 }
 
+/*
 function sendQuestion4(recipientId, message) {
 	questionNum = questionNum + 1;
 }
-
+*/
 
 // generic function sending messages
 function sendMessage(recipientId, message) {  
