@@ -56,6 +56,7 @@ function sendQuestion1(recipientId, message) {
 }
 
 function sendQuestion2(recipientId, message) {
+	console.log(message);
 	if(message == 'Yes' || 'yes') {
         sendMessage(recipientId, {text: "Ok awesome! Let's get started!"});
     } else {
