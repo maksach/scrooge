@@ -37,14 +37,14 @@ app.post('/webhook', function (req, res) {
           	} else if(questionNum === 3) {
           		month = event.message.text;
           		sendQuestion3(event.sender.id, event.message.text);
-          	} else if(questionNum === 4) {
+          	} /*else if(questionNum === 4) {
           		var categories = event.message.text.split("|");
           		for(var j = 0; j < categories.length; j++) {
           			var key = categories[j].split(" ")[0];
           			var value = categories[j].split(" ")[1];
           			table[key] = value;
           		}
-          	}
+          	}*/
         }
     }
     res.sendStatus(200);
