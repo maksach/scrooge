@@ -4,6 +4,7 @@ var request = require('request');
 var app = express();
 var questionNum = 1;
 var month;
+var table = {};
 
 app.use(bodyParser.urlencoded({extended: false}));  
 app.use(bodyParser.json());  
@@ -36,7 +37,14 @@ app.post('/webhook', function (req, res) {
           	} else if(questionNum === 3) {
           		month = event.message.text;
           		sendQuestion3(event.sender.id, event.message.text);
-          	} 
+          	} else if(questionNum === 4) {
+          		var categories = event.message.text.split("|");
+          		for(var j = 0; j < categories.length; j++) {
+          			var key = categories[j].split(" ")[0];
+          			var value = categories[j].split(" ")[1];
+          			table[key] = value;
+          		}
+          	}
         }
     }
     res.sendStatus(200);
@@ -57,8 +65,14 @@ function sendQuestion2(recipientId, message) {
 }
 
 function sendQuestion3(recipientId, message) {
-	sendMessage(recipientId, {text: "Perfect. For the month of " + month + ", let's manage your finances. The 4 main categories college students spend money on are Food, Utilities, Gas, and Entertainment. Let's start with food category. Open up your Mint app and go to the 'Overview' tab. Please enter your expenses for the food category."})
+	sendMessage(recipientId, {text: "Perfect. For the month of " + month + ", let's manage your finances. The 4 main categories college students spend money on are Food, Utilities, Gas, and Entertainment. Open up your Mint app and go to the 'Overview' tab. Please enter your expenses for each category in the following format 'Food 900|Utilities 200|Gas 100|Entertainment 200'."});
+	questionNum = questionNum + 1;
 }
+
+function sendQuestion4(recipientId, message) {
+	questionNum = questionNum + 1;
+}
+
 
 // generic function sending messages
 function sendMessage(recipientId, message) {  
