@@ -60,7 +60,6 @@ function sendQuestion2(recipientId, message) {
         sendMessage(recipientId, {text: "Ok awesome! Let's get started!"});
     } else {
         sendMessage(recipientId, {text: "Alright. That's fine. Goodbye!"});
-        return;
     }
     questionNum = questionNum + 1;
 }
