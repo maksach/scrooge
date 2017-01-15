@@ -29,10 +29,12 @@ app.post('/webhook', function (req, res) {
         var event = events[i];
         questionNum++;
         if (event.message && event.message.text) {
+        	console.log("HI");
           	if(questionNum == 1) {
           		sendMessage(event.sender.id, {text: "Thanks for visiting $crooge! Our financial advising application works to help college students save money on a monthly basis through budget analysis with Mint. Now tell me, would you like to save money this month?"});
         		questionNum++;
           	} else if(questionNum == 2) {
+          		console.log("HI AGAIN");
           		if(event.message.text == 'Yes' || 'yes') {
         			sendMessage(event.sender.id, {text: "Ok awesome! Let's get started!"});
         		} else {
