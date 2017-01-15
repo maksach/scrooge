@@ -57,7 +57,7 @@ app.post('/webhook', function (req, res) {
 });
 
 function sendQuestion1(recipientId, message) {
-	event.sender.id, {text: "Thanks for visiting $crooge! Our financial advising application works to help college students save money on a monthly basis through budget analysis with Mint. Now tell me, would you like to save money this month?"});
+	sendMessage(event.sender.id, {text: "Thanks for visiting $crooge! Our financial advising application works to help college students save money on a monthly basis through budget analysis with Mint. Now tell me, would you like to save money this month?"});
 	questionNum = questionNum + 1;
 }
 
