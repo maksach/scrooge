@@ -34,6 +34,7 @@ app.post('/webhook', function (req, res) {
           	} else if(questionNum === 2) {
           		sendQuestion2(event.sender.id, event.message.text);
           	} else if(questionNum === 3) {
+          		month = event.message.text;
           		sendQuestion3(event.sender.id, event.message.text);
           	} 
         }
